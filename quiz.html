@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Quiz</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Add your styles here -->
+    <style>
+		#quiz-container {
+		    font-family: 'Arial', sans-serif;
+		    background: rgb(184, 184, 184); /* Transparent white background for the glass effect */
+		    padding: 50px 50px;
+		    border-radius: 8px;
+		    width: 60%;
+		    margin: 20px auto;
+		    height: 450px;
+		    backdrop-filter: blur(14px); /* Glass blur effect */
+		    margin-top: 40px;
+
+		    /* Shiny effect using a linear gradient */
+		    background-image: 
+		        linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(192, 192, 192, 0.3)), /* Light shiny overlay */
+		        radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(117, 117, 117, 0.3)); /* Subtle shine */
+		    background-blend-mode: overlay; /* Blend the gradients for the shine effect */
+		    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+		    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: border for a more defined glass effect */
+		}
+
+
+
+		#quiz-container h2 {
+		    text-align: center;
+		    font-size: 2rem;
+		    color: rgb(64, 0, 128);
+		    margin-bottom: 20px;
+			margin-top: -20px;
+		}
+
+		/* Styling for the question container */
+		#question-container {
+		    font-size: 18px;
+		    color: rgb(53, 53, 53);
+		    margin-bottom: 20px;
+		}
+
+		#question-container p {
+		    margin-bottom: 15px;
+			margin-top:40px;
+		    font-weight: bold;
+		    font-size: 1.5rem;
+		    line-height: 1.5;
+		}
+
+		/* Styling for the radio buttons */
+		#question-container input[type="radio"] {
+		    display: inline-block;
+		    width: 18px;
+		    height: 18px;
+		    margin-right: 10px;
+		    margin-top: 5px;
+		    vertical-align: middle;
+		    cursor: pointer;
+		    transition: transform 0.3s ease-in-out;
+		}
+
+		#question-container input[type="radio"]:hover {
+		    transform: scale(1.2);
+		}
+
+	
+		/* Change label color when the radio button is selected */
+		#question-container input[type="radio"]:checked + label {
+		    color: rgb(64, 0, 128);
+		    font-weight: bold;
+		}
+
+		/* Add space between options */
+		#question-container input[type="radio"] + label {
+		    margin-bottom: 10px;
+		    display: block;
+		    padding-left: 5px;
+		    cursor: pointer;
+		    font-size: 1rem;
+		}
+
+		
+		/* Add spacing between options */
+		#question-container input[type="radio"]:last-child + label {
+		    margin-bottom: 0;
+		}
+
+
+		/* Button styles for navigation and submit */
+		button {
+		    background-color: rgb(64, 0, 128);
+		    color: white;
+		    padding: 10px 20px;
+		    border: none;
+		    border-radius: 5px;
+		    font-size: 1rem;
+		    cursor: pointer;
+		    transition: background-color 0.3s ease, transform 0.2s ease;
+			width:200px;
+			margin-left:40px;
+			margin-top: 100px;
+		}
+
+		button:hover {
+		    background-color: #0056b3;
+		    transform: scale(1.05);
+		}
+
+		button:disabled {
+		    background-color: #ccc;
+		    cursor: not-allowed;
+		}
+
+		/* Navigation buttons container */
+		.navigation {
+		    text-align: center;
+		    margin-top: 20px;
+		}
+
+		/* Styling for the result container */
+		#result-container {
+		    text-align: center;
+		    background-color: rgb(255, 255, 255);
+		    padding: 20px;
+		    border-radius: 8px;
+		    margin-top: 30px;
+		}
+
+		#result-container h3 {
+		    font-size: 1.8rem;
+		    color: #4caf50;
+		}
+
+		#result-container p {
+		    font-size: 1.5rem;
+		    color: rgb(0, 0, 0);
+		}
+
+		#answers-container {
+		    margin-top: 20px;
+		    background-color: rgb(255, 255, 255);
+		    padding: 15px;
+		    border-radius: 5px;
+		}
+
+		
+
+		/* Styling for the logout link */
+		.log-out {
+		    display: inline-block;
+		    padding: 10px 20px;
+		    background-color: rgb(64, 0, 128);
+		    color: white;
+		    text-decoration: none;
+		    border-radius: 5px;
+		    font-weight: bold;
+		    margin-top: 20px;
+		    transition: background-color 0.3s ease, transform 0.2s ease;
+		    cursor: pointer;
+		}
+
+		.log-out:hover {
+		    background-color: rgb(0, 0, 128);
+		    transform: scale(1.05);
+		}
+
+
+		.shine-text {
+		      text-align: center;
+		      font-size: 16px;
+		      color: rgb(128, 0, 255);
+		      margin-top: 20px;
+		      background: linear-gradient(90deg, rgb(69, 54, 156), #aaa, #555);
+		      background-size: 200% auto;
+		      -webkit-background-clip: text;
+		      -webkit-text-fill-color: transparent;
+		      animation: shine 3s linear infinite;
+			
+		    }
+
+		    @keyframes shine {
+		      0% {
+		        background-position: 200% center;
+		      }
+		      100% {
+		        background-position: -200% center;
+		      }
+		    }
+
+		    @media (max-width: 768px) {
+		      .main-content {
+		        flex-direction: column;
+		      }
+		    }
+    </style>
+</head>
+<body>
+	
+
+	   <div id="quiz-container">
+	       <h2>Java Quiz</h2>
+	       <form id="quiz-form">
+	           <div id="question-container"></div>
+	           <div class="navigation">
+	               <button type="button" id="prevBtn" onclick="navigate(-1)" style="display:none;">Previous</button>
+	               <button type="button" id="nextBtn" onclick="navigate(1)">Next</button>
+	               <button type="button" id="submitBtn" onclick="submitQuiz()" style="display:none;">Submit</button>
+	           </div>
+	       </form>
+	   </div>
+
+	   <div class="shine-text ">
+	       🚀 <span>You're doing great! Keep going and finish strong! Your knowledge is your superpower.</span>
+	   </div>
+
+	   <div id="result-container" style="display:none;">
+	       <h3>You have successfully completed the quiz!</h3>
+	       <p>Your score: <span id="score"></span> / 10</p>
+
+	       <h4>Your Answers:</h4>
+	       <div id="answers-container"></div> <!-- Display answers here -->
+
+	       <a onclick="logout()" class="log-out" href="logout">Logout</a>
+	       
+	   </div>
+
+	   <script>
+	       const questions = [
+	           { question: "What is Java?", options: ["Programming Language", "Operating System", "Web Browser", "IDE"], answer: 0 },
+	           { question: "Which of the following is NOT a primitive data type in Java?", options: ["int", "boolean", "String", "char"], answer: 2 },
+	           { question: "Which keyword is used to create a class in Java?", options: ["class", "new", "create", "object"], answer: 0 },
+	           { question: "Which method is the entry point of a Java program?", options: ["init()", "main()", "start()", "run()"], answer: 1 },
+	           { question: "What does JVM stand for?", options: ["Java Virtual Machine", "Java Variable Memory", "Java Virtual Memory", "Java View Model"], answer: 0 },
+	           { question: "Which of the following is used to handle exceptions in Java?", options: ["try-catch", "throw-throws", "exception-handler", "error-handler"], answer: 0 },
+	           { question: "What is the default value of an int in Java?", options: ["0", "null", "undefined", "NaN"], answer: 0 },
+	           { question: "What is the parent class of all exceptions in Java?", options: ["Throwable", "Exception", "Error", "RuntimeException"], answer: 1 },
+	           { question: "Which of the following is used to read input in Java?", options: ["Scanner", "Reader", "InputStream", "Console"], answer: 0 },
+	           { question: "Which of the following is NOT an access modifier in Java?", options: ["public", "protected", "private", "secure"], answer: 3 }
+	       ];
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length);
+
+        // Display the first question
+        displayQuestion();
+
+        // Retrieve email from localStorage
+		      const email = localStorage.getItem('userEmail');
+		      document.getElementById('user-email').textContent = email ? email : "Not logged in";
+		      document.getElementById('user-email-circle').textContent = email ? email.charAt(0).toUpperCase() : "?";
+       
+			  
+		
+		    function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            const questionContainer = document.getElementById("question-container");
+
+            // Question title and options
+            questionContainer.innerHTML = `
+                <p>${question.question}</p>
+                <input type="radio" name="answer" value="0" id="option0" /> ${question.options[0]} <br />
+                <input type="radio" name="answer" value="1" id="option1" /> ${question.options[1]} <br />
+                <input type="radio" name="answer" value="2" id="option2" /> ${question.options[2]} <br />
+                <input type="radio" name="answer" value="3" id="option3" /> ${question.options[3]} <br />
+            `;
+
+            // Set previously selected answer
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                document.getElementById(`option${userAnswers[currentQuestionIndex]}`).checked = true;
+            }
+
+            // Show/hide buttons based on current question index
+            if (currentQuestionIndex === 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("submitBtn").style.display = "inline";
+            } else {
+                document.getElementById("nextBtn").style.display = "inline";
+                document.getElementById("submitBtn").style.display = "none";
+            }
+        }
+
+        function navigate(direction) {
+            // Save the answer for the current question
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            if (selectedAnswer) {
+                userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+            }
+
+            // Move to next/previous question
+            currentQuestionIndex += direction;
+
+            if (currentQuestionIndex < 0) currentQuestionIndex = 0;
+            if (currentQuestionIndex >= questions.length) currentQuestionIndex = questions.length - 1;
+
+            displayQuestion();
+        }
+
+        function submitQuiz() {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            if (selectedAnswer) {
+                userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+            }
+
+            // Calculate score
+            let score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].answer) {
+                    score++;
+                }
+            }
+
+            // Display results
+            document.getElementById("quiz-container").style.display = "none";
+            document.getElementById("result-container").style.display = "block";
+            document.getElementById("score").textContent = score;
+
+            // Show the user's answers and correct answers
+            const answersContainer = document.getElementById('answers-container');
+            answersContainer.innerHTML = '';
+            for (let i = 0; i < questions.length; i++) {
+                const userAnswer = userAnswers[i] !== undefined ? questions[i].options[userAnswers[i]] : "No answer";
+                const correctAnswer = questions[i].options[questions[i].answer];
+
+                answersContainer.innerHTML += `
+                    <p><strong>Q${i + 1}: ${questions[i].question}</strong></p>
+                    <p>Your Answer: ${userAnswer}</p>
+                    <p>Correct Answer: ${correctAnswer}</p>
+                    <hr/>
+                `;
+            }
+
+            // Save the score to the backend (optional)
+            fetch('/updateScore', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, score: score })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Score saved:', data);
+            })
+            .catch(error => console.error('Error saving score:', error));
+        }
+
+        function logout() {
+            // Log out logic (clear localStorage, redirect to login page)
+            localStorage.removeItem('userEmail');
+            window.location.href = '/login'; // Adjust based on your routes
+        }
+    </script>
+</body>
+</html>
