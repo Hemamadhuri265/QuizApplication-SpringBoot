@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - Quiz Application</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: rgb(241, 228, 232);
+      color: #2c3e50;
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 40px;
+      flex-wrap: wrap;
+      min-height: 80vh;
+    }
+
+    
+    
+	.register-form {
+	  background: rgba(34, 40, 49, 0.8);
+	  backdrop-filter: blur(16px);
+	  -webkit-backdrop-filter: blur(16px);
+	  border-radius: 16px;
+	  border: 1px solid rgba(255, 255, 255, 0.1);
+	  padding: 40px 30px;
+	  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+	  width: 600px;
+	  
+	  margin: 80px auto;
+	  color: #ffffff;
+	  position: relative;
+	  overflow: hidden;
+	  margin-right:450px;
+	}
+
+	.register-form h2 {
+	  text-align: center;
+	  margin-bottom: 25px;
+	  font-size: 28px;
+	  font-weight: 600;
+	  color: #ffffff;
+	}
+
+	.register-form::before {
+	  content: "";
+	  position: absolute;
+	  top: -100%;
+	  left: -100%;
+	  width: 300%;
+	  height: 300%;
+	  background: linear-gradient(
+	    120deg,
+	    transparent 40%,
+	    rgba(255, 255, 255, 0.3),
+	    transparent 60%
+	  );
+	  transform: rotate(25deg);
+	  animation: formShine 4s infinite linear;
+	  z-index: 0;
+	  pointer-events: none;
+	}
+	@keyframes formShine {
+	  0% {
+	    transform: translateX(-100%) rotate(25deg);
+	    opacity: 0;
+	  }
+	  50% {
+	    opacity: 1;
+	  }
+	  100% {
+	    transform: translateX(100%) rotate(25deg);
+	    opacity: 0;
+	  }
+	}
+
+
+	.register-form * {
+	  position: relative;
+	  z-index: 2;
+	}
+
+	.register-form .input-group {
+	  margin-bottom: 20px;
+	}
+
+	.register-form label {
+	  display: block;
+	  margin-bottom: 6px;
+	  font-weight: 500;
+	  color: #eeeeee;
+	}
+
+	.register-form input {
+	  width: 400px;
+	  padding: 12px 15px;
+	  border-radius: 10px;
+	  border: none;
+	  background-color: #e0e0e0;
+	  color: #1e1e1e;
+	  font-size: 15px;
+	  transition: 0.3s ease;
+	}
+
+	.register-form input:focus {
+	  outline: none;
+	  box-shadow: 0 0 0 2px #00adb5;
+	}
+
+	.register-form button[type="submit"] {
+	  width:200px;
+	  padding: 12px;
+	  background: #00adb5;
+	  border: none;
+	  border-radius: 10px;
+	  color: white;
+	  font-size: 16px;
+	  font-weight: bold;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+	}
+
+	.register-form button[type="submit"]:hover {
+	  background: #028b91;
+	}
+
+	.login-link {
+	  text-align: center;
+	  margin-top: 15px;
+	  color: #eeeeee;
+	  margin-top:30px;
+	}
+
+	.login-link a {
+	  color: #00adb5;
+	  font-weight: 600;
+	  text-decoration: none;
+	}
+
+	.login-link a:hover {
+	  text-decoration: underline;
+	}
+
+
+    .shine-text {
+      text-align: center;
+      font-size: 16px;
+      color: rgb(33, 56, 190);
+      margin-top: 20px;
+      background: linear-gradient(90deg, rgb(69, 54, 156), #aaa, #555);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+	  margin-left:60px;
+	  margin-top: -60px;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-content">
+    <!-- Image on the left -->
+    <div class="image-section">
+    </div>
+
+    <!-- Form on the right -->
+    <div class="register-form">
+      <h2>Create an Account</h2>
+      <form action="/register" method="post" autocomplete="off">
+		<div th:if="${successMessage}" style="color: rgb(48, 141, 143); text-align: center; margin-bottom: 10px;">
+		   <p th:text="${successMessage}"></p>
+		 </div>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="off" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="new-password" required>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <div class="login-link">
+        Already have an account? <a href="login">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paragraph at the bottom -->
+  <p class="shine-text">🚀 Join now to unlock exciting quizzes, test your knowledge, and challenge your friends!</p>
+ 
+</body>
+</html>
