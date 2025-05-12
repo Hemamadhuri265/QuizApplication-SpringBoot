@@ -55,7 +55,7 @@ QuizApplication.java
 _________________________________________________________________________________________________________________________________________________________________
 
 🧑‍💻 Application Workflow
-
+_____________________________________
 
 📄 1. Landing Page (Index)
 Accessed via / or /index
@@ -64,7 +64,7 @@ Shows Login Form
 
 Contains "Register" link to navigate to registration
 
-_________________________________________________________________
+
 
 📝 2. User Registration
 Form fields: username, email, password
@@ -78,7 +78,7 @@ Data is validated
 Saved to MySQL using Spring Data JPA
 
 Redirects back to login page
-____________________________________________________________________
+
 
 
 🔐 3. User Login
@@ -92,10 +92,10 @@ On failure:
 
 Shows error message on the login page
 
-____________________________________________________________________
+
 👋 4. Welcome Page
 Shows a greeting and "Start Quiz" button
-___________________________________________________________________
+
 
 ❓ 5. Quiz Page
 Displays 10 pre-defined Java multiple-choice questions
@@ -105,7 +105,7 @@ Allows Next and Previous navigation
 All questions are stored in the database or hardcoded in a service
 
 At the end, user clicks Submit
-____________________________________________________________________
+
 
 🧮 6. Submit & Score
 Application checks answers
@@ -121,7 +121,7 @@ Final score
 Correct answers
 
 Logout button
-_______________________________________________________________________
+
 
 
 🔄 7. Logout
