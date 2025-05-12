@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <title>Quiz Application</title>
+  <style>
+	
+	@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+	
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: rgb(208, 208, 208);
+      color: #2c3e50;
+    }
+
+	header {
+	  font-family: "Titan One", sans-serif;
+	  font-size: 36px;
+	  font-weight: normal;
+	  text-align: left;
+	  letter-spacing: 2px;
+	  padding: 20px 40px;
+	  position: relative;
+	  display: inline-block;
+	  background: none;
+	  color:transparent;
+	  background-image: linear-gradient(135deg, rgb(0, 0, 0), #2575fc);
+	  background-clip: text;
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	  animation: bounceIn 1.2s ease forwards;
+	  overflow: hidden;
+	}
+
+	header::after {
+	  content: attr(data-text);
+	  position: absolute;
+	  top: 0;
+	  left: -100%;
+	  width: 100%;
+	  height: 100%;
+	  background-image: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+	  background-clip: text;
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	  animation: shine 2.5s infinite;
+	  white-space: nowrap;
+	  pointer-events: none;
+	}
+
+	
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 50px 10%;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+	.welcome-section {
+	  flex: 1;
+	  min-width: 300px;
+	  max-width: 600px;
+	  animation: slideInLeft 1s ease-out;
+	  margin-top:100px;
+	}
+
+	.welcome-section h1 {
+	  font-family:Georgia, 'Times New Roman', Times, serif;
+	  font-size: 27px;
+	  margin-bottom: 20px;
+	  color: #34495e;
+	  animation: fadeInDown 1.2s ease-out;
+	}
+
+	.welcome-section p {
+		margin-top:12px;
+	  font-size: 18px;
+	  margin-bottom: 25px;
+	  color: #555;
+	  line-height: 1.6;
+	  animation: fadeIn 2s ease-out;
+	  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	  
+	}
+
+	.welcome-section img {
+	  width: 100%;
+	  max-width: 400px;
+	  height: 250px;
+	  border-radius: 10px;
+	  object-fit: cover;
+	  margin-left:345px;
+	  
+	  /* No animation here */
+	}
+
+	/* Animations */
+	
+
+	@keyframes fadeInDown {
+	  0% {
+	    transform: translateY(-20px);
+	    opacity: 0;
+	  }
+	  100% {
+	    transform: translateY(0);
+	    opacity: 1;
+	  }
+	}
+
+	@keyframes fadeIn {
+	  from {
+	    opacity: 0;
+	  }
+	  to {
+	    opacity: 1;
+	  }
+	}
+
+
+	.login-form {
+	  position: relative;
+	  background: rgba(255, 255, 255, 0.15);
+	  backdrop-filter: blur(14px);
+	  -webkit-backdrop-filter: blur(14px);
+	  border-radius: 20px;
+	  border: 1px solid rgba(255, 255, 255, 0.3);
+	  padding: 40px 30px;
+	  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+	  width: 100%;
+	  max-width: 420px;
+	  margin: auto;
+	  color: #fff;
+	  overflow: hidden;
+	  z-index: 1;
+	  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
+
+	.login-form h2 {
+	  text-align: center;
+	  margin-bottom: 25px;
+	  font-size: 28px;
+	  font-weight: 600;
+	}
+
+	/* Shine animation */
+	.login-form::before {
+	  content: "";
+	  position: absolute;
+	  top: -100%;
+	  left: -100%;
+	  width: 300%;
+	  height: 300%;
+	  background: linear-gradient(
+	    120deg,
+	    transparent 40%,
+	    rgba(255, 255, 255, 0.4),
+	    transparent 60%
+	  );
+	  transform: rotate(25deg);
+	  animation: formShine 4s infinite linear;
+	  z-index: 0;
+	  pointer-events: none;
+	}
+
+	@keyframes formShine {
+	  0% {
+	    transform: translateX(-100%) rotate(25deg);
+	  }
+	  100% {
+	    transform: translateX(100%) rotate(25deg);
+	  }
+	}
+
+	.login-form {
+	  background: rgba(34, 40, 49, 0.8);
+	  backdrop-filter: blur(16px);
+	  -webkit-backdrop-filter: blur(16px);
+	  border-radius: 16px;
+	  border: 1px solid rgba(255, 255, 255, 0.1);
+	  padding: 40px 30px;
+	  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+	  width: 100%;
+	  max-width: 500px;
+	  margin: 80px auto;
+	  color: #ffffff;
+	  position: relative;
+	  overflow: hidden;
+	  margin-top:-10px;
+	  height:500px;
+	}
+
+	.login-form h2 {
+	  text-align: center;
+	  margin-bottom: 25px;
+	  font-size: 28px;
+	  font-weight: 600;
+	  color: #ffffff;
+	}
+
+	/* Shine animation */
+	.login-form::before {
+	  content: "";
+	  position: absolute;
+	  top: -100%;
+	  left: -100%;
+	  width: 300%;
+	  height: 300%;
+	  background: linear-gradient(
+	    120deg,
+	    transparent 40%,
+	    rgba(255, 255, 255, 0.3),
+	    transparent 60%
+	  );
+	  transform: rotate(25deg);
+	  animation: formShine 4s infinite linear;
+	  z-index: 0;
+	  pointer-events: none;
+	}
+
+	@keyframes formShine {
+	  0% {
+	    transform: translateX(-100%) rotate(25deg);
+	  }
+	  100% {
+	    transform: translateX(100%) rotate(25deg);
+	  }
+	}
+
+	
+	#togglePassword{
+		color:rgb(0, 0, 0);
+		transform: translate(-320px,17px);
+	}
+	.login-form * {
+	  position: relative;
+	  z-index: 2;
+	}
+
+	.input-group,
+	.login-form div {
+	  margin-bottom: 20px;
+	}
+
+	.input-group label,
+	.passwordin {
+	  display: block;
+	  margin-bottom: 6px;
+	  font-weight: 500;
+	  color: #eeeeee;
+	  margin-top:10px;
+	}
+
+	.input-group input,
+	#password {
+	  width: 350px;
+	  padding: 12px 15px;
+	  border-radius: 10px;
+	  border: none;
+	  background-color: rgb(255, 255, 255);
+	  color: #1e1e1e;
+	  font-size: 15px;
+	  transition: 0.3s ease;
+	  margin-top:10px;
+	}
+
+	.input-group input:focus,
+	#password:focus {
+	  outline: none;
+	  box-shadow: 0 0 0 2px #00adb5;
+	}
+
+	.fa-eye {
+	  position: absolute;
+	  margin-top: -35px;
+	  margin-left: 90%;
+	  color: #444;
+	  cursor: pointer;
+	}
+
+	button[type="submit"] {
+	  width: 200px;
+	  padding: 12px;
+	  background: rgb(64, 0, 128);
+	  border: none;
+	  border-radius: 10px;
+	  color: rgb(255, 255, 255);
+	  font-size: 16px;
+	  font-weight: bold;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+	}
+
+	button[type="submit"]:hover {
+	  background: rgb(96, 152, 215);
+	  color: white;
+	}
+
+	.register-link {
+	  text-align: center;
+	  margin-top: 45px;
+	  color: #eeeeee;
+	}
+
+	.register-link a {
+	  color: rgb(64, 128, 128);
+	  font-weight: 600;
+	  text-decoration: none;
+	}
+
+	.register-link a:hover {
+	  text-decoration: underline;
+	  color:rgb(179, 172, 236);
+	}
+  </style>
+</head>
+<body>
+
+  <header>Quizee</header>
+
+  <div class="container">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <h1>Welcome to the Ultimate Quiz Challenge!</h1>
+      <p>Are you ready to put your brain to the test? Dive into our quizzes and level up your knowledge while having fun. Compete, learn, and be the best!</p>
+  
+    </div>
+
+	<!-- Login Form -->
+	<div class="login-form">
+	  <h2>Login</h2>
+	  <div th:if="${error}" style="color: red; font-weight: bold;">
+	  	      <p th:text="${error}"></p>
+	  	  </div>
+	  <form action="/login" method="post" autocomplete="off">
+	    <!-- Hidden inputs to prevent browser autofill -->
+	    <input type="text" name="fake-username" style="display: none;" autocomplete="username">
+	    <input type="password" name="fake-password" style="display: none;" autocomplete="new-password">
+
+	    <div class="input-group">
+	      <label for="email">Email</label>
+	      <input type="email" id="email" name="email" autocomplete="new-email" placeholder="Enter Email" required />
+	    </div>
+
+	    <div >
+	      <label for="password" class="passwordin">Password</label>
+	      <i class="fa-solid fa-eye" id="togglePassword"></i>
+	      <input type="password" id="password" name="password" autocomplete="new-password" placeholder="Enter Password" required />
+	    </div>
+	    
+	    <button type="submit">Login</button>
+	  </form>
+	  <div class="register-link">
+	    New here? <a href="register">Register</a>
+	  </div>
+	</div>
+     
+	<script>
+	    const togglePassword = document.getElementById("togglePassword");
+	    const password = document.getElementById("password");
+
+	    // Set initial type to "password" (dots are the default behavior)
+	    password.type = "password"; 
+
+	    // Event listener to toggle password visibility
+	    togglePassword.addEventListener("click", function () {
+	      const isPasswordVisible = password.type === "text";
+	      password.type = isPasswordVisible ? "password" : "text";
+
+	      // Toggle the eye icon between eye and eye-slash
+	      if (isPasswordVisible) {
+	        togglePassword.classList.remove("fa-eye");
+	        togglePassword.classList.add("fa-eye-slash");
+	      } else {
+	        togglePassword.classList.remove("fa-eye-slash");
+	        togglePassword.classList.add("fa-eye");
+	      }
+	    });
+		
+		
+		  const loginForm = document.querySelector('form'); // Ensure you target your form correctly
+		  loginForm.addEventListener('submit', function(event) {
+		    const email = document.getElementById('email').value;
+		    localStorage.setItem('userEmail', email); // Store email in localStorage
+		  });
+		
+
+	  </script>
+
+</body>
+</html>
